@@ -1,0 +1,15 @@
+language: nix
+script:
+  - nix-build -o deb --cores 8 -A deb default.nix
+  - nix-build -o rpm --cores 8 -A rpm default.nix
+deploy:
+  provider: releases
+  api_key:
+    secure: 3srolnuynyx21qjY2mDtlgZ1VBse9x+gHt8ra1f0huW92+WRML1PmQHn9s/C6cW5CMs6KUopiF0DfUNBqqwAgm5A1yLqj17f3yhUUSkC3bJfhoNVfAEutkl37I8G4X/aNbA2whHS2caNFaqD6QJu7fsfnSpTQyPTSHDJbCl2oq3OQ7hEIjsyim3LSyoI3cfMZdejY1WDSZNYCMTl41SeP4ESz2URwuJayWhITAtHbPzvxf6zLIoEUH6+F7nw/N+A6lMSpus1Vk8QsRXkcF2W4v3DJuQng1ZQZwKR8We5UL8Iba0mFinuNN+K271y6KpezyfjK1tZ51CKCX2UOgqdmmCzXgrixmpbj1M3TDRuzKBaLOG4JVLszw2LEypLN7sZZUt4xPfva0AdpiEnF8tmYBU64DNJt2rIqbsAMW8XpTsTLlxP3x4tMhavw+qfZ82gA6iHupYZsQUKIyHQ7rK99SfpooNqLhNWn5Q01OeJj0SKQp1xAg8ZNjz0Jr+OA40kPKjumUqZWKu6c+MlSZO8cCggxS2xL5L+G/uKsJHWkTu84fUuIGvjQzffUAR3FMlxxQL/NhylvOPeBDDb/cm0s+N4o6pzpLf7UGNwK320qtM3DrAZlM90SboCzS7q/3QClXNG6Nk6B8TGBnIY8kgzamVk509+Tv/AEmzNVAoR+kg=
+  file_glob: true
+  file: 
+    - deb/*.deb
+    - rpm/*.rpm
+  on:
+    repo: Mic92/nix-fpm-multiuser
+    tags: true
